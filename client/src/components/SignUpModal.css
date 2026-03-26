@@ -1,0 +1,7 @@
+/* Reuses styles from LoginModal since they share identical structural classes */
+.input-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: -0.25rem;
+  margin-left: 0.25rem;
+}

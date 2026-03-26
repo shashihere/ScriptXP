@@ -1,0 +1,170 @@
+/* ========== Class Selector ========== */
+.class-selector {
+  animation: fadeInUp 0.6s ease-out;
+  margin-bottom: 2rem;
+}
+
+.class-selector-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.class-selector-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--text-main);
+  text-shadow: 4px 4px 0 var(--accent-primary);
+}
+
+.class-selector-subtitle {
+  color: var(--accent-tertiary);
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== Grid ========== */
+.class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0.5rem;
+}
+
+/* ========== Playful Colorful Cards ========== */
+.class-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 1.5rem;
+  background: rgba(15, 15, 20, 0.95);
+  border: 3px solid var(--card-color);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 6px 6px 0 var(--card-color);
+}
+
+.class-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 12px 12px 0 var(--card-color);
+  background: rgba(25, 25, 30, 0.95);
+}
+
+.class-card.selected {
+  background: var(--card-color);
+  color: var(--bg-dark);
+  box-shadow: 0 0 30px var(--card-glow), 8px 8px 0 var(--bg-dark), 10px 10px 0 var(--card-color);
+  transform: translate(-2px, -2px) scale(1.02);
+  z-index: 10;
+}
+
+.class-card.selected .class-card-desc,
+.class-card.selected .skill-tag {
+  color: var(--bg-dark);
+  font-weight: 700;
+  border-color: rgba(0,0,0,0.3);
+}
+
+.card-content-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.class-card-icon {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.5));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.class-card:hover .class-card-icon {
+  transform: scale(1.25) rotate(12deg);
+}
+
+.class-card-name {
+  font-family: var(--font-cursive);
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--card-color);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  text-transform: capitalize;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.8);
+}
+
+.class-card.selected .class-card-name {
+  color: var(--bg-dark);
+  text-shadow: none;
+}
+
+.class-card-desc {
+  font-size: 0.95rem;
+  color: var(--text-main);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+/* ========== Skill Tags ========== */
+.class-card-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--card-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  transition: all 0.3s ease;
+}
+
+.class-card:hover .skill-tag {
+  background: var(--card-color);
+  color: var(--bg-dark);
+}
+
+/* ========== Selected Badge ========== */
+.selected-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 1rem;
+  background: var(--bg-dark);
+  border: 2px solid var(--card-color);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-main);
+  text-transform: uppercase;
+  z-index: 5;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0) rotate(-10deg); }
+  80% { transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@media (max-width: 640px) {
+  .class-grid {
+    grid-template-columns: 1fr;
+  }
+}

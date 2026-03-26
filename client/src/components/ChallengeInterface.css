@@ -1,0 +1,370 @@
+.challenge-container {
+  display: flex;
+  gap: 0;
+  background: var(--bg-dark);
+  border: 4px solid var(--accent-secondary);
+  border-radius: var(--radius-lg);
+  box-shadow: 10px 10px 0 var(--accent-secondary);
+  min-height: 600px;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.challenge-sidebar {
+  flex: 1.1;
+  padding: 30px;
+  border-right: 4px solid var(--accent-secondary);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: rgba(20, 20, 25, 0.95);
+}
+
+.challenge-header {
+  margin-bottom: 24px;
+}
+
+.difficulty-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  border: 2px solid;
+  box-shadow: 3px 3px 0;
+  text-transform: uppercase;
+}
+
+.difficulty-badge.easy {
+  background: var(--bg-dark);
+  color: var(--green);
+  border-color: var(--green);
+  box-shadow: 3px 3px 0 var(--green);
+}
+
+.challenge-header h2 {
+  font-family: var(--font-cursive);
+  font-size: 3rem;
+  line-height: 1;
+  margin-top: 10px;
+  color: var(--accent-primary);
+  text-shadow: 2px 2px 0 var(--bg-dark), 4px 4px 0 var(--accent-secondary);
+}
+
+.challenge-description p {
+  color: var(--text-main);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+.challenge-description code {
+  background: var(--bg-dark);
+  padding: 4px 8px;
+  border: 2px solid var(--accent-tertiary);
+  border-radius: 6px;
+  color: var(--accent-tertiary);
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.challenge-example {
+  background: var(--bg-dark);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  margin-top: 24px;
+  border: 4px solid var(--accent-primary);
+  box-shadow: 6px 6px 0 var(--accent-primary);
+  position: relative;
+}
+
+.challenge-example::before {
+  content: "EXAMPLE";
+  position: absolute;
+  top: -12px;
+  left: 15px;
+  background: var(--accent-primary);
+  color: var(--bg-dark);
+  padding: 2px 10px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: var(--radius-full);
+}
+
+.challenge-example h4 {
+  display: none;
+}
+
+.challenge-example pre {
+  color: var(--text-main);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* ========== Language Selector ========== */
+.language-selector {
+  background: var(--bg-dark);
+  color: var(--accent-tertiary);
+  border: 3px solid var(--accent-tertiary);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 4px 4px 0 var(--accent-tertiary);
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300F0FF' stroke-width='3'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
+}
+
+.language-selector:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--accent-tertiary);
+  background: rgba(0, 240, 255, 0.1);
+}
+
+.language-selector option {
+  background: var(--bg-dark);
+  color: var(--white);
+  padding: 8px;
+}
+
+/* ========== Editor Section ========== */
+.challenge-editor-section {
+  flex: 1.3;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 10, 15, 0.9);
+}
+
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(10, 10, 15, 0.95);
+  border-bottom: 4px solid var(--accent-secondary);
+}
+
+.editor-header span {
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.btn-run {
+  background: var(--accent-tertiary);
+  color: var(--bg-dark);
+  border: 3px solid var(--bg-dark);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--text-main);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-run:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--accent-primary);
+  background: var(--accent-primary);
+}
+
+.btn-run:disabled {
+  opacity: 0.6;
+  filter: grayscale(1);
+  box-shadow: none;
+  transform: none;
+}
+
+.code-editor {
+  flex: 1;
+  width: 100%;
+  padding: 24px;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  tab-size: 4;
+}
+
+.console-output {
+  height: 180px;
+  background: var(--bg-dark);
+  border-top: 4px solid var(--accent-secondary);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.console-header {
+  color: var(--accent-secondary);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+}
+
+.console-output pre {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: pre-wrap;
+}
+
+.console-output.success pre {
+  color: var(--green);
+  text-shadow: 0 0 10px var(--green-glow);
+}
+
+.console-output.error pre {
+  color: var(--rose);
+}
+
+.console-output.running pre {
+  color: var(--cyan);
+  animation: pulse 1s infinite alternate;
+}
+
+/* ========== Hints Section ========== */
+.hints-section {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 4px dashed rgba(255, 255, 255, 0.1);
+}
+
+.hints-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hints-icon {
+  font-size: 1.5rem;
+}
+
+.hints-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--amber);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  flex: 1;
+}
+
+.btn-hint {
+  background: var(--amber);
+  color: var(--bg-dark);
+  border: 3px solid var(--bg-dark);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--text-main);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-hint:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--text-main);
+}
+
+.hints-complete {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.hints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hint-card {
+  background: var(--bg-dark);
+  border: 3px solid var(--amber);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 5px 5px 0 var(--amber);
+  animation: hintReveal 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) both;
+}
+
+.hint-number {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: var(--amber);
+  color: var(--bg-dark);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: 8px;
+}
+
+.hint-card p {
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.hints-empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 600;
+  margin: 0;
+}
+
+@keyframes hintReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .challenge-container {
+    flex-direction: column;
+  }
+  .challenge-sidebar {
+    border-right: none;
+    border-bottom: 4px solid var(--accent-secondary);
+  }
+}
