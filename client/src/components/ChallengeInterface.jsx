@@ -5,7 +5,6 @@ const LANGUAGES = [
   { id: 'javascript', label: 'JavaScript' },
   { id: 'python', label: 'Python' },
   { id: 'cpp', label: 'C++' },
-  { id: 'java', label: 'Java' },
   { id: 'c', label: 'C' },
 ];
 
@@ -34,7 +33,6 @@ const CHALLENGES = [
       javascript: 'function twoSum(nums, target) {\n  // Write your code here\n  \n}',
       python: 'def two_sum(nums, target):\n    # Write your code here\n    pass',
       cpp: '#include <vector>\nusing namespace std;\n\nvector<int> twoSum(vector<int>& nums, int target) {\n    // Write your code here\n    \n}',
-      java: 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Write your code here\n        \n    }\n}',
       c: '#include <stdlib.h>\n\nint* twoSum(int* nums, int numsSize, int target, int* returnSize) {\n    // Write your code here\n    \n}'
     }
   },
@@ -54,7 +52,6 @@ const CHALLENGES = [
       javascript: 'function isPalindrome(s) {\n  // Write your code here\n  \n}',
       python: 'def isPalindrome(s: str) -> bool:\n    # Write your code here\n    pass',
       cpp: '#include <string>\nusing namespace std;\n\nbool isPalindrome(string s) {\n    // Write your code here\n    \n}',
-      java: 'class Solution {\n    public boolean isPalindrome(String s) {\n        // Write your code here\n        \n    }\n}',
       c: '#include <stdbool.h>\n\nbool isPalindrome(char * s) {\n    // Write your code here\n    \n}'
     }
   },
@@ -74,7 +71,6 @@ const CHALLENGES = [
       javascript: 'function climbStairs(n) {\n  // Write your code here\n  \n}',
       python: 'def climbStairs(n: int) -> int:\n    # Write your code here\n    pass',
       cpp: 'int climbStairs(int n) {\n    // Write your code here\n    \n}',
-      java: 'class Solution {\n    public int climbStairs(int n) {\n        // Write your code here\n        \n    }\n}',
       c: 'int climbStairs(int n) {\n    // Write your code here\n    \n}'
     }
   }

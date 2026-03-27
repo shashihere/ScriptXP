@@ -81,6 +81,34 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const resetUserProgress = async () => {
+    setLoading(true);
+    try {
+      const res = await api.put('/auth/profile/reset');
+      setUser(res.data);
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Failed to reset progress.';
+      return { success: false, message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteUserAccount = async () => {
+    setLoading(true);
+    try {
+      await api.delete('/auth/profile');
+      logout();
+      return { success: true };
+    } catch (error) {
+      const message = error.response?.data?.message || 'Failed to delete account.';
+      return { success: false, message };
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -106,6 +134,8 @@ export function AuthProvider({ children }) {
       login,
       googleLogin,
       updateProfile,
+      resetUserProgress,
+      deleteUserAccount,
       logout,
       selectClass,
       clearNewUser,

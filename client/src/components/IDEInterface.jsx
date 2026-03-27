@@ -6,7 +6,6 @@ const STARTER_CODE = {
   js: '// Welcome to the Sandbox!\nconsole.log("Hello, ScriptXP!");\n',
   py: '# Welcome to the Sandbox!\nprint("Hello, ScriptXP!")\n',
   cpp: '// Welcome to the Sandbox!\n#include <iostream>\nusing namespace std;\n\nint main() {\n    cout << "Hello, ScriptXP!" << endl;\n    return 0;\n}',
-  java: '// Welcome to the Sandbox!\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello, ScriptXP!");\n    }\n}',
   c: '// Welcome to the Sandbox!\n#include <stdio.h>\n\nint main() {\n    printf("Hello, ScriptXP!\\n");\n    return 0;\n}'
 };
 
@@ -14,7 +13,6 @@ const CODEX_LANGUAGES = {
   js: { id: 'js', label: 'JavaScript' },
   py: { id: 'py', label: 'Python 3' },
   cpp: { id: 'cpp', label: 'C++' },
-  java: { id: 'java', label: 'Java' },
   c: { id: 'c', label: 'C' }
 };
 
@@ -22,7 +20,6 @@ const JUDGE0_LANG_IDS = {
   javascript: 63,
   python: 71,
   cpp: 54,
-  java: 62,
   c: 50
 };
 

@@ -62,20 +62,6 @@ router.post('/', async (req, res) => {
         command = `gcc ${filename} -o ${exeName} && ${exeName}`;
         break;
 
-      case 'java':
-        // Java requires the public class name to match the file name.
-        // We will assume the class is "Main".
-        filename = path.join(tempDir, `Main_${runId}.java`);
-        
-        // We explicitly replace "public class Main" with "public class Main_uuid" 
-        // to prevent namespace collisions if multiple requests happen at the same time.
-        const safeJavaCode = code.replace(/public class Main/g, `public class Main_${runId}`);
-        fs.writeFileSync(filename, safeJavaCode);
-        
-        // Navigate to tempDir, compile, and run the specific class
-        command = `cd ${tempDir} && javac Main_${runId}.java && java Main_${runId}`;
-        break;
-
       default:
         return res.status(400).json({ error: 'Unsupported language' });
     }
@@ -112,12 +98,6 @@ router.post('/', async (req, res) => {
     try {
       if (filename && fs.existsSync(filename)) fs.unlinkSync(filename);
       if (exeName && fs.existsSync(exeName)) fs.unlinkSync(exeName);
-      
-      // Special cleanup for Java `.class` files generated in the temp dir
-      if (language === 'java') {
-        const classFile = path.join(tempDir, `Main_${runId}.class`);
-        if (fs.existsSync(classFile)) fs.unlinkSync(classFile);
-      }
     } catch (cleanupError) {
       console.error('Failed to clean up temp files:', cleanupError);
     }

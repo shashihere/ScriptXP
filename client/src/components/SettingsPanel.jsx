@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
-import { User, Mail, AtSign, Lock, Save, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { User, Mail, AtSign, Lock, Save, AlertCircle, CheckCircle2, Trash2, ShieldAlert } from 'lucide-react';
 import './SettingsPanel.css';
 
 export default function SettingsPanel() {
-  const { user, updateProfile } = useAuth();
+  const { user, updateProfile, resetUserProgress, deleteUserAccount } = useAuth();
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
@@ -15,6 +15,11 @@ export default function SettingsPanel() {
   
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Danger Zone States
+  const [isResetting, setIsResetting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,6 +56,35 @@ export default function SettingsPanel() {
     }
     
     setIsSubmitting(false);
+  };
+
+  const handleResetProgress = async () => {
+    if (!window.confirm("WARNING: This will permanently reset your XP, Level, and Badges to zero. This cannot be undone. Proceed?")) return;
+    
+    setIsResetting(true);
+    const result = await resetUserProgress();
+    if (result.success) {
+      setStatus({ type: 'success', message: 'Neural link progress has been successfully reset.' });
+    } else {
+      setStatus({ type: 'error', message: result.message });
+    }
+    setIsResetting(false);
+  };
+
+  const handleDeleteAccount = async () => {
+    if (confirmDelete !== user?.email) {
+      alert("Please type your exact email to confirm account deletion.");
+      return;
+    }
+    
+    setIsDeleting(true);
+    const result = await deleteUserAccount();
+    if (!result.success) {
+      setStatus({ type: 'error', message: result.message });
+      setIsDeleting(false);
+      setConfirmDelete('');
+    }
+    // Note: If success, the AuthContext kicks them to login automatically via logout()
   };
 
   return (
@@ -152,6 +186,62 @@ export default function SettingsPanel() {
             </button>
           </div>
         </form>
+      </div>
+
+      <div className="danger-zone glass-panel">
+        <div className="danger-header">
+          <ShieldAlert size={26} />
+          <h3>Danger Zone</h3>
+        </div>
+        
+        <div className="danger-item">
+          <div className="danger-info">
+            <h4>Reset Gamification Progress</h4>
+            <p>Permanently resets your XP, Levels, and Badges back to defaults. Ideal for fresh starts.</p>
+          </div>
+          <button 
+            className="btn-danger" 
+            onClick={handleResetProgress}
+            disabled={isResetting}
+          >
+            <AlertCircle size={18} />
+            {isResetting ? "RESETTING..." : "RESET PROGRESS"}
+          </button>
+        </div>
+
+        <div className="danger-item" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '15px' }}>
+          <div className="danger-info">
+            <h4>Obliterate Neural Link (Delete Account)</h4>
+            <p>Permanently destroys your account data, problem submissions, and identity from the database. This action is irreversible.</p>
+          </div>
+          
+          <div style={{ display: 'flex', gap: '10px', width: '100%', alignItems: 'center', flexWrap: 'wrap' }}>
+            <input 
+              type="text" 
+              placeholder={`Type "${user?.email}" to confirm`} 
+              value={confirmDelete}
+              onChange={(e) => setConfirmDelete(e.target.value)}
+              style={{
+                background: 'rgba(0,0,0,0.3)',
+                border: '1px solid rgba(255,60,60,0.3)',
+                color: '#fff',
+                padding: '10px 15px',
+                borderRadius: '6px',
+                flexGrow: 1,
+                maxWidth: '400px'
+              }}
+            />
+            <button 
+              className="btn-danger-solid" 
+              onClick={handleDeleteAccount}
+              disabled={isDeleting || confirmDelete !== user?.email}
+              style={{ opacity: confirmDelete === user?.email ? 1 : 0.5 }}
+            >
+              <Trash2 size={18} />
+              {isDeleting ? "OBLITERATING..." : "DELETE ACCOUNT"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

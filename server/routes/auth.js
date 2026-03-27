@@ -248,4 +248,59 @@ router.put('/profile', protect, async (req, res) => {
   }
 });
 
+// @route   PUT /api/auth/profile/reset
+// @desc    Permanently reset user XP, levels, and badges back to defaults
+// @access  Private
+router.put('/profile/reset', protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (user) {
+      user.xp = 100;
+      user.level = 1;
+      user.badges = ['Early Adopter'];
+      
+      const updatedUser = await user.save();
+
+      res.json({
+        id: updatedUser._id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        userId: updatedUser.userId,
+        xp: updatedUser.xp,
+        level: updatedUser.level,
+        class: updatedUser.class,
+        skills: updatedUser.skills,
+        badges: updatedUser.badges,
+      });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Progress reset error:', error);
+    res.status(500).json({ message: 'Server error during progress reset' });
+  }
+});
+
+// @route   DELETE /api/auth/profile
+// @desc    Permanently delete the user account entirely from the database
+// @access  Private
+router.delete('/profile', protect, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (user) {
+      // Use Mongoose deleteOne to safely remove
+      await User.deleteOne({ _id: user._id });
+      res.json({ message: 'Account has been permanently deleted.' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Account deletion error:', error);
+    res.status(500).json({ message: 'Server error during account deletion process' });
+  }
+});
+
 module.exports = router;
+
