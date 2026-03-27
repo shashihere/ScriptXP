@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LayoutDashboard, BookOpen, Swords, Trophy, Settings, LogOut, Code2, Zap, Shield, Star } from 'lucide-react';
+import { LayoutDashboard, BookOpen, Swords, Trophy, Settings, LogOut, Code2, Zap, Shield, Star, Terminal } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import XPNotification from '../components/XPNotification';
 import ClassSelector from '../components/ClassSelector';
@@ -9,6 +9,7 @@ import Leaderboard from '../components/Leaderboard';
 import ChallengeInterface from '../components/ChallengeInterface';
 import BadgeShowcase from '../components/BadgeShowcase';
 import SettingsPanel from '../components/SettingsPanel';
+import IDEInterface from '../components/IDEInterface';
 import './Dashboard.css';
 
 const fadeUp = {
@@ -72,6 +73,9 @@ export default function Dashboard() {
           </button>
           <button onClick={() => setActiveTab('challenges')} className={`nav-item ${activeTab === 'challenges' ? 'active' : ''}`}>
             <Swords size={20} /> <span className="nav-label">Challenges</span>
+          </button>
+          <button onClick={() => setActiveTab('ide')} className={`nav-item ${activeTab === 'ide' ? 'active' : ''}`}>
+            <Terminal size={20} /> <span className="nav-label">Open IDE</span>
           </button>
           <button onClick={() => setActiveTab('leaderboard')} className={`nav-item ${activeTab === 'leaderboard' ? 'active' : ''}`}>
             <Trophy size={20} /> <span className="nav-label">Leaderboard</span>
@@ -211,6 +215,12 @@ export default function Dashboard() {
           {activeTab === 'challenges' && (
             <motion.div key="challenges" variants={fadeUp} initial="hidden" animate="visible" exit="exit" className="tab-content">
               <ChallengeInterface />
+            </motion.div>
+          )}
+
+          {activeTab === 'ide' && (
+            <motion.div key="ide" variants={fadeUp} initial="hidden" animate="visible" exit="exit" className="tab-content">
+              <IDEInterface />
             </motion.div>
           )}
 

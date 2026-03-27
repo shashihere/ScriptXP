@@ -29,6 +29,7 @@ app.use('/api/problems', require('./routes/problems'));
 app.use('/api/topics', require('./routes/topics'));
 app.use('/api/gamification', require('./routes/gamification'));
 app.use('/api/daily-challenge', require('./routes/dailyChallenge'));
+app.use('/api/execute', require('./routes/execute'));
 
 // Health check
 app.get('/api/health', (req, res) => {
