@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 import { X, Mail, Lock, User, AtSign, UserPlus } from 'lucide-react';
 import './SignUpModal.css';
 
@@ -34,6 +35,14 @@ export default function SignUpModal({ isOpen, onClose, onSwitchToLogin }) {
     }
 
     const result = await signup(formData);
+    if (!result.success) {
+      setError(result.message);
+    }
+  };
+
+  const handleGoogleSuccess = async (credentialResponse) => {
+    setError('');
+    const result = await googleLogin(credentialResponse.credential); /* We use the same googleLogin for signup since backend handles creation */
     if (!result.success) {
       setError(result.message);
     }
@@ -154,6 +163,16 @@ export default function SignUpModal({ isOpen, onClose, onSwitchToLogin }) {
                     </>
                   )}
                 </button>
+                
+                <div className="google-auth-wrapper" style={{ marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
+                  <GoogleLogin
+                    onSuccess={handleGoogleSuccess}
+                    onError={() => setError('Google Sign Up was unsuccessful.')}
+                    theme="filled_black"
+                    shape="pill"
+                    text="signup_with"
+                  />
+                </div>
               </form>
 
               <div className="modal-footer">

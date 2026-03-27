@@ -8,6 +8,7 @@ import SkillTree from '../components/SkillTree';
 import Leaderboard from '../components/Leaderboard';
 import ChallengeInterface from '../components/ChallengeInterface';
 import BadgeShowcase from '../components/BadgeShowcase';
+import SettingsPanel from '../components/SettingsPanel';
 import './Dashboard.css';
 
 const fadeUp = {
@@ -223,9 +224,7 @@ export default function Dashboard() {
           {activeTab === 'settings' && (
             <motion.div key="settings" variants={fadeUp} initial="hidden" animate="visible" exit="exit" className="tab-content">
               <h2 className="section-title font-cursive" style={{ fontSize: '3rem' }}>System Settings</h2>
-              <div className="dash-xp-card glass-panel" style={{ marginTop: '20px' }}>
-                <p>Profile configuration and custom keybinds unlock at Level 5.</p>
-              </div>
+              <SettingsPanel />
             </motion.div>
           )}
         </AnimatePresence>
