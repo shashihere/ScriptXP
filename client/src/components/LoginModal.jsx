@@ -6,7 +6,7 @@ import { X, Mail, Lock, LogIn, KeyRound } from 'lucide-react';
 import './LoginModal.css';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToSignUp }) {
-  const { login, loading } = useAuth();
+  const { login, googleLogin, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -6,7 +6,7 @@ import { X, Mail, Lock, User, AtSign, UserPlus } from 'lucide-react';
 import './SignUpModal.css';
 
 export default function SignUpModal({ isOpen, onClose, onSwitchToLogin }) {
-  const { signup, loading } = useAuth();
+  const { signup, googleLogin, loading } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

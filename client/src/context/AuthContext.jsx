@@ -55,6 +55,7 @@ export function AuthProvider({ children }) {
       const res = await api.post('/auth/google', { token: credentialToken });
       setToken(res.data.token);
       setUser(res.data.user);
+      localStorage.setItem('ms_token', res.data.token);
       // We could check if it's a new user based on their level/skills, but we'll assume standard login flow
       setIsNewUser(false);
       return { success: true };
