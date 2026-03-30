@@ -1,12 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 const { protect } = require('../middleware/auth');
 
 const router = express.Router();
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // Generate JWT
 const generateToken = (id) => {
@@ -125,69 +123,6 @@ router.post('/login', async (req, res) => {
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: 'Server error during login' });
-  }
-});
-
-// @route   POST /api/auth/google
-// @desc    Authenticate with Google OAuth
-// @access  Public
-router.post('/google', async (req, res) => {
-  try {
-    const { token } = req.body;
-    if (!token) {
-      return res.status(400).json({ message: 'No Google token provided.' });
-    }
-
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID,
-    });
-    const payload = ticket.getPayload();
-    const { email, name, sub } = payload;
-    
-    // Find if user already exists
-    let user = await User.findOne({ email: email.toLowerCase() });
-    
-    if (!user) {
-      // Create a sensible default userId from part of their email and sub
-      const cleanEmail = email.split('@')[0].replace(/[^a-zA-Z0-9_]/g, '');
-      const userId = `${cleanEmail}_${sub.substring(0, 4)}`;
-      
-      // We still need a password field because it's required in schema, we generate a random secure hash
-      const randomPassword = require('crypto').randomBytes(32).toString('hex');
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(randomPassword, salt);
-      
-      user = await User.create({
-        name,
-        email: email.toLowerCase(),
-        userId,
-        password: hashedPassword,
-        xp: 100,
-        level: 1,
-        badges: ['Early Adopter'],
-      });
-    }
-
-    const jwtToken = generateToken(user._id);
-
-    res.json({
-      token: jwtToken,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        userId: user.userId,
-        xp: user.xp,
-        level: user.level,
-        class: user.class,
-        skills: user.skills,
-        badges: user.badges,
-      },
-    });
-  } catch (error) {
-    console.error('Google Auth Error:', error);
-    res.status(500).json({ message: 'Google authentication failed' });
   }
 });
 

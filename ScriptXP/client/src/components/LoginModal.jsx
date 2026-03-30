@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
-import { GoogleLogin } from '@react-oauth/google';
 import { X, Mail, Lock, LogIn, KeyRound } from 'lucide-react';
 import './LoginModal.css';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToSignUp }) {
-  const { login, googleLogin, loading } = useAuth();
+  const { login, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,14 +20,6 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignUp }) {
     }
 
     const result = await login(email, password);
-    if (!result.success) {
-      setError(result.message);
-    }
-  };
-
-  const handleGoogleSuccess = async (credentialResponse) => {
-    setError('');
-    const result = await googleLogin(credentialResponse.credential);
     if (!result.success) {
       setError(result.message);
     }
@@ -114,16 +105,6 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignUp }) {
                     </>
                   )}
                 </button>
-
-                <div className="google-auth-wrapper" style={{ marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
-                  <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={() => setError('Google Sign In was unsuccessful.')}
-                    theme="filled_black"
-                    shape="pill"
-                    text="continue_with"
-                  />
-                </div>
               </form>
 
               <div className="modal-footer">

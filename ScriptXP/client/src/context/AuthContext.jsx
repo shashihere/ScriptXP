@@ -49,24 +49,6 @@ export function AuthProvider({ children }) {
     }
   };
 
-  const googleLogin = async (credentialToken) => {
-    setLoading(true);
-    try {
-      const res = await api.post('/auth/google', { token: credentialToken });
-      setToken(res.data.token);
-      setUser(res.data.user);
-      localStorage.setItem('ms_token', res.data.token);
-      // We could check if it's a new user based on their level/skills, but we'll assume standard login flow
-      setIsNewUser(false);
-      return { success: true };
-    } catch (error) {
-      const message = error.response?.data?.message || 'Google login failed. Please try again.';
-      return { success: false, message };
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const updateProfile = async (profileData) => {
     setLoading(true);
     try {
@@ -132,7 +114,6 @@ export function AuthProvider({ children }) {
       isNewUser,
       signup,
       login,
-      googleLogin,
       updateProfile,
       resetUserProgress,
       deleteUserAccount,
