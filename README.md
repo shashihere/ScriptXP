@@ -19,10 +19,10 @@ By combining robust native execution engines with an aesthetic, gamified progres
 
 ## 🖼️ Interface Showcase
 <div align="center">
-  <img src="./ScriptXP/docs/assets/landing.png" width="45%" title="Playful Brutalist Landing Page" />
-  <img src="./ScriptXP/docs/assets/ide_sandbox.png" width="45%" title="Global Interactive Sandbox" /> 
-  <img src="./ScriptXP/docs/assets/dashboard.png" width="45%" title="Gamified Profile Dashboard" />
-  <img src="./ScriptXP/docs/assets/ide_challenges.png" width="45%" title="Algorithm Challenges Engine" />
+  <img src="./docs/assets/landing.png" width="45%" title="Playful Brutalist Landing Page" />
+  <img src="./docs/assets/ide_sandbox.png" width="45%" title="Global Interactive Sandbox" /> 
+  <img src="./docs/assets/dashboard.png" width="45%" title="Gamified Profile Dashboard" />
+  <img src="./docs/assets/ide_challenges.png" width="45%" title="Algorithm Challenges Engine" />
 </div>
 
 ## ✨ Core Features
