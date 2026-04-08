@@ -18,6 +18,14 @@
 
 By combining robust native execution engines with an aesthetic, gamified progression loop, ScriptXP allows developers to practice, compile, and battle-test their logic across multiple languages directly in the browser.
 
+## 🖼️ Interface Showcase
+<div align="center">
+  <img src="./docs/assets/landing.png" width="45%" title="Playful Brutalist Landing Page" />
+  <img src="./docs/assets/ide_sandbox.png" width="45%" title="Global Interactive Sandbox" /> 
+  <img src="./docs/assets/dashboard.png" width="45%" title="Gamified Profile Dashboard" />
+  <img src="./docs/assets/ide_challenges.png" width="45%" title="Algorithm Challenges Engine" />
+</div>
+
 ## ✨ Core Features
 * ⚔️ **Native Code Execution:** Write and securely compile Python, C++, C, or JavaScript remotely using our ultra-fast `child_process` backend architecture.
 * 🏆 **Gamification Engine:** Earn XP, conquer Daily Challenges, and acquire exclusive Badges (like *Early Adopter*) directly attached to your Neural Link profile!
